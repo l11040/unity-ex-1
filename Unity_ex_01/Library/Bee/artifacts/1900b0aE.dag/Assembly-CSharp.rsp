@@ -359,6 +359,7 @@
 "Assets/Assets/QuarterView 3D Action BE5/ReadMe/Scripts/ReadmeBE5.cs"
 "Assets/Scripts/CameraMove.cs"
 "Assets/Scripts/ItemRotate.cs"
+"Assets/Scripts/Lobby.cs"
 "Assets/Scripts/Player.cs"
 -langversion:9.0
 

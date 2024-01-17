@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -13,11 +14,15 @@ public class Player : MonoBehaviour
 
     public int leftItem;
 
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI leftText;
+    public GameObject endImage;
+
     void Start()
     {
         //같은 Inspector 내에서 Rigidbody를 가져오겠다는 뜻
         rb = GetComponent<Rigidbody>();
-        leftItem = 10;
+        leftItem = 9;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,14 +44,14 @@ public class Player : MonoBehaviour
 
         leftItem--;
 
-        Debug.Log("score : " + score);
-        Debug.Log("left Item : " + leftItem);
-
 
         if (score >= 120)
         {
-            Debug.Log("Game End!!");
+            endImage.SetActive(true);
         }
+
+        scoreText.text = "Score : " + score + "/120";
+        leftText.text = "Left Item : " + leftItem;
 
     }
 
