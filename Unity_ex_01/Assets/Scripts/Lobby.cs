@@ -7,6 +7,6 @@ public class Lobby : MonoBehaviour
 {
     public void OnClickGameStart()
     {
-        SceneManager.LoadScene("MyGame");
+        SceneManager.LoadScene("MyGame_android");
     }
 }
