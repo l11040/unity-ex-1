@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -21,11 +22,14 @@ public class Player : MonoBehaviour
 
     public GameObject reGamePoint;
 
+    public Animator anime;
+
     void Start()
     {
         //같은 Inspector 내에서 Rigidbody를 가져오겠다는 뜻
         rb = GetComponent<Rigidbody>();
         leftItem = 9;
+        anime = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -92,8 +96,12 @@ public class Player : MonoBehaviour
         // rb.AddForce(movement * speed);
 
 
+        // rb.AddForce(direction * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
         Vector3 direction = Vector3.forward * variableJoystick.Vertical + Vector3.right * variableJoystick.Horizontal;
-        rb.AddForce(direction * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+        transform.LookAt(transform.position + direction);
+        transform.position += direction * speed * Time.deltaTime;
+        anime.SetBool("isRun", direction != Vector3.zero);
+        FreezeRotation();
 
 
         // if (Input.GetKey(KeyCode.Space) && isJump)
@@ -101,6 +109,11 @@ public class Player : MonoBehaviour
         //     rb.AddForce(Vector3.up * 3f, ForceMode.Impulse);
         //     isJump = false;
         // }
+    }
+
+    void FreezeRotation()
+    {
+        rb.angularVelocity = Vector3.zero;
     }
 
     public void OnClickJump()
